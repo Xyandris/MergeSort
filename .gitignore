@@ -1,0 +1,14 @@
+# Pomijamy pliki tworzone podczas kompilacji i generowania dokumentacji.
+/build/
+/out/
+/.vs/
+/mergesort
+/mergesort.exe
+/docs/doxygen/
+/docs/*.aux
+/docs/*.log
+/docs/*.out
+/docs/*.toc
+/docs/*.fls
+/docs/*.fdb_latexmk
+/.idea
