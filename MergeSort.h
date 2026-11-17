@@ -3,20 +3,25 @@
 
 #include <vector>
 
-// Oznaczenie typu elementow sortowanej tablicy.
+// Typ elementow sortowanej tablicy.
 template <typename T>
 class MergeSort
 {
 public:
-    //  Metoda wywolywana z main albo z testu.
+    // Wyowałanie metody z main albo z testu.
     void sortuj(T tablica[], int rozmiar)
     {
+        // Pusta tablica i pojedynczy element sa juz posortowane.
+        if (rozmiar < 2)
+        {
+            return;
+        }
 
         sortujZakres(tablica, 0, rozmiar - 1);
     }
 
 private:
-    // Dzielenie zakresu do pojedynczych elementów
+    // Dzielenie zakresu do pozostania 1 elementu.
     void sortujZakres(T tablica[], int lewy, int prawy)
     {
         if (lewy < prawy)
@@ -28,13 +33,13 @@ private:
         }
     }
 
-    // Łązczenie posortowanych czesci tablicy.
+    // Łączenie posortowanych częśći.
     void scal(T tablica[], int lewy, int srodek, int prawy)
     {
         int rozmiarLewej = srodek - lewy + 1;
         int rozmiarPrawej = prawy - srodek;
 
-        // Vectory jako tablice pomocnicze.
+        // Vectory jak tablice pomocnicze
         std::vector<T> lewa(rozmiarLewej);
         std::vector<T> prawa(rozmiarPrawej);
 
@@ -51,7 +56,7 @@ private:
         int j = 0;
         int k = lewy;
 
-        // Wybieranie mniejszej liczby
+        // Z dwoch pierwszych dostepnych liczb wybieramy mniejsza.
         while (i < rozmiarLewej && j < rozmiarPrawej)
         {
             if (lewa[i] <= prawa[j])
@@ -67,7 +72,7 @@ private:
             k++;
         }
 
-        // Przespisanie elementów z lewej części
+        // Przepisanie elementów z pozostałej lewej części
         while (i < rozmiarLewej)
         {
             tablica[k] = lewa[i];
@@ -75,7 +80,7 @@ private:
             k++;
         }
 
-        // Przepisanie elementów z prawej części
+        // Przepisanie elementów z pozostałej prawej części
         while (j < rozmiarPrawej)
         {
             tablica[k] = prawa[j];
