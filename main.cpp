@@ -3,7 +3,7 @@
 
 int main()
 {
-    // Tablica i odpowiedni typ sortowania.
+    // Kazda tablica ma wlasny typ i odpowiedni obiekt sortujacy.
     int liczbyInt[] = {8, -3, 5, 1, 5, 0};
     double liczbyDouble[] = {3.5, -1.25, 0.0, 2.75, -1.25};
     int rozmiarInt = sizeof(liczbyInt) / sizeof(liczbyInt[0]);
@@ -36,7 +36,7 @@ int main()
     }
     std::cout << "\n";
 
-    // Działa też dla zmiennoprzecinkowych.
+    // Ta sama klasa dziala tez dla liczb zmiennoprzecinkowych.
     sortowanieDouble.sortuj(liczbyDouble, rozmiarDouble);
 
     std::cout << "double po: ";
