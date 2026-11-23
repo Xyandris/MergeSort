@@ -93,6 +93,96 @@ TEST(MergeSortInt, LosowaTablica)
     }
 }
 
+// Pusty vector reprezentuje tablice o zerowej liczbie elementow.
+TEST(MergeSortInt, PustaTablica)
+{
+    std::vector<int> tablica;
+    MergeSort<int> sortowanie;
+
+    EXPECT_NO_THROW(sortowanie.sortuj(tablica.data(), 0));
+    EXPECT_TRUE(tablica.empty());
+}
+
+// Jeden element nie wymaga zadnego przestawiania.
+TEST(MergeSortInt, JedenElement)
+{
+    int tablica[] = {7};
+    int oczekiwane[] = {7};
+    int rozmiar = sizeof(tablica) / sizeof(tablica[0]);
+    MergeSort<int> sortowanie;
+
+    sortowanie.sortuj(tablica, rozmiar);
+
+    for (int i = 0; i < rozmiar; i++)
+    {
+        EXPECT_EQ(tablica[i], oczekiwane[i]);
+    }
+}
+
+// Powtarzajace sie wartosci nie moga zniknac.
+TEST(MergeSortInt, Duplikaty)
+{
+    int tablica[] = {4, 2, 4, 1, 2, 4};
+    int oczekiwane[] = {1, 2, 2, 4, 4, 4};
+    int rozmiar = sizeof(tablica) / sizeof(tablica[0]);
+    MergeSort<int> sortowanie;
+
+    sortowanie.sortuj(tablica, rozmiar);
+
+    for (int i = 0; i < rozmiar; i++)
+    {
+        EXPECT_EQ(tablica[i], oczekiwane[i]);
+    }
+}
+
+// Duplikaty wystepuja tez w tablicy ujemnej.
+TEST(MergeSortInt, UjemneZDuplikatami)
+{
+    int tablica[] = {-3, -1, -3, -7, -1};
+    int oczekiwane[] = {-7, -3, -3, -1, -1};
+    int rozmiar = sizeof(tablica) / sizeof(tablica[0]);
+    MergeSort<int> sortowanie;
+
+    sortowanie.sortuj(tablica, rozmiar);
+
+    for (int i = 0; i < rozmiar; i++)
+    {
+        EXPECT_EQ(tablica[i], oczekiwane[i]);
+    }
+}
+
+// Laczymy oba znaki, zero i duplikaty.
+TEST(MergeSortInt, MieszaneZDuplikatami)
+{
+    int tablica[] = {3, -2, 0, 3, -2, 1};
+    int oczekiwane[] = {-2, -2, 0, 1, 3, 3};
+    int rozmiar = sizeof(tablica) / sizeof(tablica[0]);
+    MergeSort<int> sortowanie;
+
+    sortowanie.sortuj(tablica, rozmiar);
+
+    for (int i = 0; i < rozmiar; i++)
+    {
+        EXPECT_EQ(tablica[i], oczekiwane[i]);
+    }
+}
+
+// Dwa elementy rosnaco maja pozostac na swoich miejscach.
+TEST(MergeSortInt, DwaElementyRosnaco)
+{
+    int tablica[] = {2, 5};
+    int oczekiwane[] = {2, 5};
+    int rozmiar = sizeof(tablica) / sizeof(tablica[0]);
+    MergeSort<int> sortowanie;
+
+    sortowanie.sortuj(tablica, rozmiar);
+
+    for (int i = 0; i < rozmiar; i++)
+    {
+        EXPECT_EQ(tablica[i], oczekiwane[i]);
+    }
+}
+
 // Sprawdzamy niezmieniona kolejnosc liczb double.
 TEST(MergeSortDouble, JuzRosnaco)
 {
@@ -174,6 +264,96 @@ TEST(MergeSortDouble, LosowaTablica)
     std::sort(oczekiwane.begin(), oczekiwane.end());
 
     MergeSort<double> sortowanie;
+    sortowanie.sortuj(tablica, rozmiar);
+
+    for (int i = 0; i < rozmiar; i++)
+    {
+        EXPECT_DOUBLE_EQ(tablica[i], oczekiwane[i]);
+    }
+}
+
+// Pusty vector reprezentuje tablice o zerowej liczbie elementow.
+TEST(MergeSortDouble, PustaTablica)
+{
+    std::vector<double> tablica;
+    MergeSort<double> sortowanie;
+
+    EXPECT_NO_THROW(sortowanie.sortuj(tablica.data(), 0));
+    EXPECT_TRUE(tablica.empty());
+}
+
+// Pojedynczy double zachowuje swoja wartosc.
+TEST(MergeSortDouble, JedenElement)
+{
+    double tablica[] = {7.25};
+    double oczekiwane[] = {7.25};
+    int rozmiar = sizeof(tablica) / sizeof(tablica[0]);
+    MergeSort<double> sortowanie;
+
+    sortowanie.sortuj(tablica, rozmiar);
+
+    for (int i = 0; i < rozmiar; i++)
+    {
+        EXPECT_DOUBLE_EQ(tablica[i], oczekiwane[i]);
+    }
+}
+
+// Sprawdzamy liczbe wystapien powtarzajacych sie ulamkow.
+TEST(MergeSortDouble, Duplikaty)
+{
+    double tablica[] = {4.5, 2.25, 4.5, 1.0, 2.25};
+    double oczekiwane[] = {1.0, 2.25, 2.25, 4.5, 4.5};
+    int rozmiar = sizeof(tablica) / sizeof(tablica[0]);
+    MergeSort<double> sortowanie;
+
+    sortowanie.sortuj(tablica, rozmiar);
+
+    for (int i = 0; i < rozmiar; i++)
+    {
+        EXPECT_DOUBLE_EQ(tablica[i], oczekiwane[i]);
+    }
+}
+
+// Ujemne liczby double moga sie powtarzac.
+TEST(MergeSortDouble, UjemneZDuplikatami)
+{
+    double tablica[] = {-3.5, -1.25, -3.5, -7.0, -1.25};
+    double oczekiwane[] = {-7.0, -3.5, -3.5, -1.25, -1.25};
+    int rozmiar = sizeof(tablica) / sizeof(tablica[0]);
+    MergeSort<double> sortowanie;
+
+    sortowanie.sortuj(tablica, rozmiar);
+
+    for (int i = 0; i < rozmiar; i++)
+    {
+        EXPECT_DOUBLE_EQ(tablica[i], oczekiwane[i]);
+    }
+}
+
+// Sprawdzamy oba znaki i duplikaty double.
+TEST(MergeSortDouble, MieszaneZDuplikatami)
+{
+    double tablica[] = {3.5, -2.25, 0.0, 3.5, -2.25, 1.0};
+    double oczekiwane[] = {-2.25, -2.25, 0.0, 1.0, 3.5, 3.5};
+    int rozmiar = sizeof(tablica) / sizeof(tablica[0]);
+    MergeSort<double> sortowanie;
+
+    sortowanie.sortuj(tablica, rozmiar);
+
+    for (int i = 0; i < rozmiar; i++)
+    {
+        EXPECT_DOUBLE_EQ(tablica[i], oczekiwane[i]);
+    }
+}
+
+// Dwa rosnace ulamki zostaja bez zmian.
+TEST(MergeSortDouble, DwaElementyRosnaco)
+{
+    double tablica[] = {2.25, 5.5};
+    double oczekiwane[] = {2.25, 5.5};
+    int rozmiar = sizeof(tablica) / sizeof(tablica[0]);
+    MergeSort<double> sortowanie;
+
     sortowanie.sortuj(tablica, rozmiar);
 
     for (int i = 0; i < rozmiar; i++)
