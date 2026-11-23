@@ -183,6 +183,46 @@ TEST(MergeSortInt, DwaElementyRosnaco)
     }
 }
 
+// 150 elementow spelnia warunek tablicy wiekszej niz 100.
+TEST(MergeSortInt, PonadStoElementow)
+{
+    const int rozmiar = 150;
+    int tablica[rozmiar];
+    for (int i = 0; i < rozmiar; i++)
+    {
+        tablica[i] = rozmiar - i;
+    }
+
+    MergeSort<int> sortowanie;
+    sortowanie.sortuj(tablica, rozmiar);
+
+    for (int i = 0; i < rozmiar; i++)
+    {
+        EXPECT_EQ(tablica[i], i + 1);
+    }
+}
+
+// W tej duzej tablicy sa liczby obu znakow, zera i duplikaty.
+TEST(MergeSortInt, PonadStoMieszanychZDuplikatami)
+{
+    const int rozmiar = 150;
+    int tablica[rozmiar];
+    for (int i = 0; i < rozmiar; i++)
+    {
+        tablica[i] = (i * 17) % 41 - 20;
+    }
+    std::vector<int> oczekiwane(tablica, tablica + rozmiar);
+    std::sort(oczekiwane.begin(), oczekiwane.end());
+
+    MergeSort<int> sortowanie;
+    sortowanie.sortuj(tablica, rozmiar);
+
+    for (int i = 0; i < rozmiar; i++)
+    {
+        EXPECT_EQ(tablica[i], oczekiwane[i]);
+    }
+}
+
 // Sprawdzamy niezmieniona kolejnosc liczb double.
 TEST(MergeSortDouble, JuzRosnaco)
 {
@@ -359,6 +399,78 @@ TEST(MergeSortDouble, DwaElementyRosnaco)
     for (int i = 0; i < rozmiar; i++)
     {
         EXPECT_DOUBLE_EQ(tablica[i], oczekiwane[i]);
+    }
+}
+
+// 150 elementow spelnia warunek tablicy wiekszej niz 100.
+TEST(MergeSortDouble, PonadStoElementow)
+{
+    const int rozmiar = 150;
+    double tablica[rozmiar];
+    for (int i = 0; i < rozmiar; i++)
+    {
+        tablica[i] = (rozmiar - i) / 2.0;
+    }
+
+    MergeSort<double> sortowanie;
+    sortowanie.sortuj(tablica, rozmiar);
+
+    for (int i = 0; i < rozmiar; i++)
+    {
+        EXPECT_DOUBLE_EQ(tablica[i], (i + 1) / 2.0);
+    }
+}
+
+// W tej duzej tablicy sa liczby obu znakow, zera i duplikaty.
+TEST(MergeSortDouble, PonadStoMieszanychZDuplikatami)
+{
+    const int rozmiar = 150;
+    double tablica[rozmiar];
+    for (int i = 0; i < rozmiar; i++)
+    {
+        tablica[i] = ((i * 17) % 41 - 20) / 2.0;
+    }
+    std::vector<double> oczekiwane(tablica, tablica + rozmiar);
+    std::sort(oczekiwane.begin(), oczekiwane.end());
+
+    MergeSort<double> sortowanie;
+    sortowanie.sortuj(tablica, rozmiar);
+
+    for (int i = 0; i < rozmiar; i++)
+    {
+        EXPECT_DOUBLE_EQ(tablica[i], oczekiwane[i]);
+    }
+}
+
+// Dodatkowo sprawdzamy szablon z typem float.
+TEST(MergeSortInneTypy, Float)
+{
+    float tablica[] = {2.5f, -1.0f, 0.5f, 2.5f};
+    float oczekiwane[] = {-1.0f, 0.5f, 2.5f, 2.5f};
+    int rozmiar = sizeof(tablica) / sizeof(tablica[0]);
+    MergeSort<float> sortowanie;
+
+    sortowanie.sortuj(tablica, rozmiar);
+
+    for (int i = 0; i < rozmiar; i++)
+    {
+        EXPECT_EQ(tablica[i], oczekiwane[i]);
+    }
+}
+
+// Sprawdzamy takze liczby typu long int.
+TEST(MergeSortInneTypy, LongInt)
+{
+    long int tablica[] = {1000000L, -1000000L, 0L, 1000000L};
+    long int oczekiwane[] = {-1000000L, 0L, 1000000L, 1000000L};
+    int rozmiar = sizeof(tablica) / sizeof(tablica[0]);
+    MergeSort<long int> sortowanie;
+
+    sortowanie.sortuj(tablica, rozmiar);
+
+    for (int i = 0; i < rozmiar; i++)
+    {
+        EXPECT_EQ(tablica[i], oczekiwane[i]);
     }
 }
 
