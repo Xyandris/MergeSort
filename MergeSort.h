@@ -1,14 +1,32 @@
+/**
+ * @file MergeSort.h
+ * @brief Szablon klasy sortujacej tablice przez scalanie.
+ */
 #ifndef MERGE_SORT_H
 #define MERGE_SORT_H
 
 #include <vector>
 
-// T oznacza typ elementow sortowanej tablicy.
+/**
+ * @brief Sortuje tablice rosnaco algorytmem MergeSort.
+ * @tparam T Typ elementow, np. int, double, float lub long int.
+ *
+ * Typ musi obslugiwac kopiowanie, domyslne tworzenie oraz operator <=.
+ * Dla liczb zmiennoprzecinkowych zakladamy wartosci bez NaN.
+ */
 template <typename T>
 class MergeSort
 {
 public:
-    // To jest metoda wywolywana z main albo z testu.
+    /**
+     * @brief Sortuje elementy w przekazanej tablicy.
+     * @param tablica Tablica zmieniana w miejscu; dla rozmiaru 0 moze byc nullptr.
+     * @param rozmiar Liczba elementow tablicy.
+     * @pre Rozmiar jest nieujemny. Dla rozmiaru dodatniego tablica wskazuje
+     *      na co najmniej rozmiar poprawnych elementow typu T.
+     * @note Dla pustej tablicy i jednego elementu funkcja od razu konczy prace.
+     * @note Czas O(n log n), dodatkowa pamiec O(n).
+     */
     void sortuj(T tablica[], int rozmiar)
     {
         // Pusta tablica i pojedynczy element sa juz posortowane.
@@ -21,7 +39,12 @@ public:
     }
 
 private:
-    // Dzielimy zakres tak dlugo, az zostanie w nim jeden element.
+    /**
+     * @brief Rekurencyjnie dzieli zakres i scala jego posortowane czesci.
+     * @param tablica Tablica z sortowanymi danymi.
+     * @param lewy Indeks pierwszego elementu zakresu.
+     * @param prawy Indeks ostatniego elementu zakresu, wlacznie.
+     */
     void sortujZakres(T tablica[], int lewy, int prawy)
     {
         if (lewy < prawy)
@@ -33,7 +56,14 @@ private:
         }
     }
 
-    // Laczymy dwie juz posortowane czesci tablicy.
+    /**
+     * @brief Scala dwie sasiednie, rosnaco posortowane czesci.
+     * @param tablica Tablica, do ktorej wpisywany jest wynik.
+     * @param lewy Poczatek lewej czesci.
+     * @param srodek Koniec lewej czesci; prawa zaczyna sie o jeden dalej.
+     * @param prawy Koniec prawej czesci, wlacznie.
+     * @note Przy rownych wartosciach jako pierwszy wybierany jest element z lewej.
+     */
     void scal(T tablica[], int lewy, int srodek, int prawy)
     {
         int rozmiarLewej = srodek - lewy + 1;
