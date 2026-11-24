@@ -1,0 +1,17 @@
+# Doxygen czyta komentarze z kodu i zapisuje dokumentacje HTML.
+PROJECT_NAME           = "MergeSort - projekt P3"
+OUTPUT_DIRECTORY       = docs/doxygen
+OUTPUT_LANGUAGE        = Polish
+INPUT                  = MergeSort.h main.cpp tests/test_merge_sort.cpp
+FILE_PATTERNS          = *.h *.cpp
+RECURSIVE              = NO
+EXTRACT_ALL            = NO
+EXTRACT_PRIVATE        = YES
+GENERATE_HTML          = NO
+GENERATE_LATEX         = YES
+HAVE_DOT               = NO
+SOURCE_BROWSER         = YES
+QUIET                  = YES
+WARNINGS               = YES
+WARN_IF_UNDOCUMENTED   = NO
+WARN_IF_DOC_ERROR      = YES

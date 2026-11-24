@@ -1,6 +1,14 @@
+/**
+ * @file main.cpp
+ * @brief Przyklad sortowania dwoch tablic: int oraz double.
+ */
 #include <iostream>
 #include "MergeSort.h"
 
+/**
+ * @brief Wypisuje obie tablice przed sortowaniem i po sortowaniu.
+ * @return 0 po zakonczeniu programu.
+ */
 int main()
 {
     // Kazda tablica ma wlasny typ i odpowiedni obiekt sortujacy.

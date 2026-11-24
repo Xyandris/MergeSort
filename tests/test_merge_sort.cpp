@@ -1,3 +1,10 @@
+/**
+ * @file test_merge_sort.cpp
+ * @brief Testy jednostkowe MergeSort w Google Test.
+ *
+ * Wymagane przypadki sa sprawdzane osobno dla int i double.
+ * Dwa dodatkowe testy sprawdzaja float oraz long int.
+ */
 #include <gtest/gtest.h>
 #include <algorithm>
 #include <random>
